@@ -1,0 +1,5 @@
+.qodo
+.vscode
+.DS_store
+data/*
+!data/.gitkeep
