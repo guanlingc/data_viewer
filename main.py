@@ -52,8 +52,8 @@ with tab1:
 
     st.markdown('#### Correlation of the Features')
     corr = df.corr(numeric_only=True)
-    heatmap_fig = px.imshow(corr, text_auto=True)
-    st.plotly_chart(heatmap_fig)
+    heatmap_fig = px.imshow(corr, text_auto=True, range_color=[-1,1])
+    st.plotly_chart(heatmap_fig, use_container_width=True)
     
 
 
@@ -106,12 +106,13 @@ with tab3:
         bivariate_x_min = st.number_input("#### X-axis min", value=None, key=13)
         bivariate_x_max = st.number_input("#### X-axis max", value=None, key=14)
 
-    bivariate_bins = st.slider("Number of bins", min_value=1, max_value=100, value=5, key=9) 
+
     bivariate_color_plot = st.selectbox("Select a column to highlight the plot", columns, index=None, key =15)    
 
     # create the plot
-    bivariate_fig = px.histogram(df, x = bivariate_x_col, y = bivariate_y_col,
+    bivariate_fig = px.scatter(df, x = bivariate_x_col, y = bivariate_y_col,
                         color = bivariate_color_plot,
+                        color_continuous_scale='viridis',
                         title = f"Diagram of {bivariate_x_col} against {bivariate_y_col}")
     
     bivariate_fig.update_yaxes(range = [y_min, y_max])
